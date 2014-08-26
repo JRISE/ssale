@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ssale.entity">
+	<class name="Role" table="S_ROLE">
+		<id name="id" length="20" type="long" column="R_ID">
+			<generator class="increment" />
+		</id>
+		<property name="name" length="50" type="string" column="R_NAME" />
+		<property name="type" type="integer" column="R_TYPE" />
+		<property name="description" length="500" type="string" column="R_DES" />
+		
+		<!-- 用户和角色是多对多的关系 -->
+		<set name="users" table="S_USER_ROLE">
+			<key>
+				<column name="U_ID"></column>
+			</key>
+			<many-to-many class="User" column="R_ID"></many-to-many>
+		</set>
+		
+		<!-- 菜单和角色是多对多的关系 -->
+		<set name="menus" table="S_MENU_ROLE" order-by="M_ID">
+			<key>
+				<column name="M_ID"></column>
+			</key>
+			<many-to-many class="Menu" column="R_ID"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

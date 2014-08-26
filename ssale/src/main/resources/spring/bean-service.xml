@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/aop 
+                           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                           http://www.springframework.org/schema/tx 
+                           http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+
+	<!-- 配置事务管理类 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- 定义需要进行事务管理的method -->
+	<tx:advice id="tx" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" read-only="false" />
+			<tx:method name="update*" read-only="false" />
+			<tx:method name="delete*" read-only="false" />
+			<tx:method name="upload*" read-only="false" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 配置需要管理事务的类 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.ssale.base.impl.BaseServiceImpl.*(..))"
+			id="baseperform" />
+		<aop:advisor advice-ref="tx" pointcut-ref="baseperform" />
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut expression="execution(* com.ssale.service.impl.*.*(..))"
+			id="perform" />
+		<aop:advisor advice-ref="tx" pointcut-ref="perform" />
+	</aop:config>
+
+	<!-- 配置需要容器管理的service -->
+    <bean id="userService" class="com.ssale.service.impl.UserServiceImpl">
+		<property name="baseDao"><ref bean="userDao"/></property>
+	</bean>
+
+    <bean id="roleService" class="com.ssale.service.impl.RoleServiceImpl">
+		<property name="baseDao"><ref bean="roleDao"/></property>
+	</bean>
+
+    <bean id="menuService" class="com.ssale.service.impl.MenuServiceImpl">
+		<property name="baseDao"><ref bean="menuDao"/></property>
+	</bean>
+
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 配置action 配置规则：小功能点直接配置为模块名，大功能配置功能名-->
+	<package name="user" namespace="/" extends="mypackage">
+		<!-- 操作员管理 -->
+  		<action name="userAction_*" method="{1}" class="com.ssale.action.sys.UserAction">
+  			<result name="listAction">${pageContext.request.contextPath}/WEB-INF/pages/user/userList.jsp</result>
+  			<result name="createUI">${pageContext.request.contextPath}/WEB-INF/pages/user/userCreate.jsp</result>
+  			<result name="updateUI">${pageContext.request.contextPath}/WEB-INF/pages/user/userUpdate.jsp</result>
+  			<result name="none">${pageContext.request.contextPath}/WEB-INF/pages/user/none.jsp</result>
+  			<result name="action2action" type="chain">userAction_toList</result>
+  			<!-- 试验 -->
+  			<result name="error">${pageContext.request.contextPath}/WEB-INF/pages/message/manyAdd.jsp</result>
+  		</action>
+
+		<!-- 角色管理 -->
+  		<action name="roleAction_*" method="{1}" class="com.ssale.action.sys.RoleAction">
+  			<result name="listAction">${pageContext.request.contextPath}/WEB-INF/pages/role/roleList.jsp</result>
+  			<result name="createUI">${pageContext.request.contextPath}/WEB-INF/pages/role/roleCreate.jsp</result>
+  			<result name="updateUI">${pageContext.request.contextPath}/WEB-INF/pages/role/roleUpdate.jsp</result>
+  			<result name="action2action" type="chain">roleAction_toList</result>
+  		</action>
+
+		<!-- 菜单管理 -->
+  		<action name="menuAction_*" method="{1}" class="com.ssale.action.sys.MenuAction">
+  			<result name="listAction">${pageContext.request.contextPath}/WEB-INF/pages/menu/menuList.jsp</result>
+  			<result name="createUI">${pageContext.request.contextPath}/WEB-INF/pages/menu/menuCreate.jsp</result>
+  			<result name="updateUI">${pageContext.request.contextPath}/WEB-INF/pages/menu/menuUpdate.jsp</result>
+  			<result name="action2action" type="chain">menuAction_toList</result>
+  		</action>
+
+	</package>
+</struts>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="mypackage" extends="json-default,struts-default"
+		abstract="true">
+		<interceptors>
+			<!-- 黑名单不需要进行全站拦截,登录验证就可以了 -->
+			<!-- <interceptor name="blackList" class="com.ssale.Interceptor.BlackListInterceptor"/> -->
+<!-- 			<interceptor name="loginCheck" class="com.ssale.Interceptor.LoginInterceptor" /> -->
+			<interceptor-stack name="mydefaultStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+<!-- 				<interceptor-ref name="loginCheck"></interceptor-ref> -->
+				<!-- <interceptor-ref name="blackList"></interceptor-ref> -->
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="mydefaultStack"></default-interceptor-ref>
+		<!-- 配置全局结果集,转向错误页面和拒绝页面 -->
+		<global-results>
+			<result name="toerror">${pageContext.request.contextPath}/toerror.jsp
+			</result>
+		</global-results>
+	</package>
+</struts>

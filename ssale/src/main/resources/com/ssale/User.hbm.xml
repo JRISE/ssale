@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ssale.entity">
+	<class name="User" table="S_USER">
+		<id name="id" length="20" type="long" column="U_ID">
+			<generator class="increment" />
+		</id>
+		<property name="name" length="100" type="string" column="U_NAME" />
+		<property name="account" length="20" type="string" column="U_ACCOUNT" />
+		<property name="password" length="20" type="string" column="U_PASSWORD" />
+		<property name="type" length="2" type="string" column="U_TYPE" />
+		<property name="createDate" type="timestamp" column="U_CREATE" />
+		<property name="lastLogin" type="timestamp" column="U_LASTLOGIN" />
+		<property name="birthday" type="timestamp" column="U_BIRTHDAY" />
+		<property name="state" length="1" type="string" column="U_STATE" />
+		<property name="blackList" length="1" type="string" column="U_BLACKLIST" />
+		
+		
+		<!-- 用户和角色是多对多的关系 -->
+		<set name="roles" table="USER_ROLE">
+			<key>
+				<column name="R_ID"></column>
+			</key>
+			<many-to-many class="Role" column="U_ID"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

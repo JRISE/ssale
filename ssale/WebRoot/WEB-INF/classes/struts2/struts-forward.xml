@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 配置action 配置规则：小功能点直接配置为模块名，大功能配置功能名-->
+	<package name="forwardAction" namespace="/" extends="mypackage">
+  		<action name="forwardAction_*" method="{1}" class="com.ssale.action.sys.ForwardAction">
+  			<result name="top">${pageContext.request.contextPath}/WEB-INF/pages/home/top.jsp</result>
+  			<result name="right">${pageContext.request.contextPath}/WEB-INF/pages/home/right.jsp</result>
+  			<result name="listAction">${pageContext.request.contextPath}/WEB-INF/pages/home/left.jsp</result>
+  			<result name="center">${pageContext.request.contextPath}/WEB-INF/pages/home/center.jsp</result>
+  			<result name="todo">${pageContext.request.contextPath}/WEB-INF/pages/home/todo.jsp</result>
+  		</action>
+		
+	</package>
+</struts>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+<session-factory>
+	<!-- 1.数据库链接 -->
+	<property name="hibernate.connection.driver_class">
+		com.mysql.jdbc.Driver
+	</property>
+	<property name="hibernate.connection.url">
+		jdbc:mysql://localhost:13306/ssale?characterEncoding=UTF-8
+		<!-- jdbc:mysql://10.162.9.144:13306/ssale?characterEncoding=UTF-8 -->
+	</property>
+
+
+	<property name="hibernate.connection.username">root</property>
+	<property name="hibernate.connection.password">xuziyiroot</property>
+
+	<property name="hibernate.dialect">
+		org.hibernate.dialect.MySQL5Dialect
+	</property>
+	<property name="show_sql">true</property>
+	<!-- <property name="hibernate.format_sql">true</property> -->
+	<property name="hibernate.hbm2ddl.auto">update</property>
+
+	<mapping resource="com/ssale/User.hbm.xml" />
+	<mapping resource="com/ssale/Role.hbm.xml" />
+	<mapping resource="com/ssale/Menu.hbm.xml" />
+</session-factory>
+</hibernate-configuration>	

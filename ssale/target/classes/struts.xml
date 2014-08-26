@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 1.基础配置 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="objectFactory" value="spring" />
+	<!-- <constant name="struts.multipart.maxSize" value="10701096000" /> -->
+	<!-- <constant name = "struts.multipart.saveDir" value = "d:/app" /> -->
+
+	<!-- 2.action声明 -->
+	<include file="struts2/struts-mydefault.xml" />
+	<include file="struts2/struts-login.xml" />
+	<include file="struts2/struts-forward.xml" />
+	<include file="struts2/struts-sys.xml" />
+</struts>	
